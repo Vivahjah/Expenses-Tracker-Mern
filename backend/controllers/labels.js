@@ -20,7 +20,8 @@ const getLabels = async (req, res) => {
     if (!label){
         throw new NotFoundError("Lookup collection error")
     }
-    res.status(StatusCodes.CREATED).json({ category });
+    let labelDetails = label.map(v => Object.assign({},{id: v._id, name : v.name, type: v.type, color: v.categoriesInfo.color}))
+    res.status(StatusCodes.CREATED).json({ labelDetails });
 
 
 }

@@ -3,7 +3,7 @@ import {useForm} from "react-hook-form"
 import Lists from "./Lists";
 
 const Forms = () => {
-    const {register, handleSubmit, resetField} = useForm();
+    const {register, handleSubmit} = useForm();
 
     const onSubmit = (data) => {
        
@@ -23,7 +23,7 @@ const Forms = () => {
             <option value="savings">Savings</option>
           </select>
           <div className="input-group">
-            <input type="text" {...register('amount')} placeholder="Salary, House Rent, SIP" className="form-input" />
+            <input type="text" {...register('amount')} placeholder="Amount" className="form-input" />
           </div>
           <div className="submit-btn">
             <button className="border py-2 text-white bg-indigo-500 w-full">make Transaction</button>
