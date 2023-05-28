@@ -1,13 +1,19 @@
 import React from "react";
 import {useForm} from "react-hook-form"
 import Lists from "./Lists";
+import { default as api } from "../redux/apiSlice";
 
 const Forms = () => {
-    const {register, handleSubmit} = useForm();
+  const [addTransaction] = api.useAddTransactionMutation()
+    const {register, handleSubmit, resetField} = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
+      if(!data) return {};
+      await addTransaction(data).unwrap()
+      resetField('name')
+      resetField('amount')
        
-        console.log(data);
+       
     }
   return (
     <div className="form max-w-sm mx-auto w-96">

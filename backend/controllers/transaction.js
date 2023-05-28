@@ -10,7 +10,7 @@ const createTransaction = async (req, res) => {
         throw new BadRequestError("Fill in all fields")
     }
     let transaction  = await Transaction.create({type, name, amount})
-    res.status(StatusCodes.OK).json({ transaction });
+    res.status(StatusCodes.CREATED).json({ transaction });
   }
 
   const getAllTransaction = async (req, res) => {
