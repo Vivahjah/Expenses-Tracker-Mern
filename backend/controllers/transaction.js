@@ -14,6 +14,7 @@ const createTransaction = async (req, res) => {
   }
 
   const getAllTransaction = async (req, res) => {
+    
     let transactions = await Transaction.find({})
     res.status(StatusCodes.OK).json({ transactions });
  
@@ -27,5 +28,7 @@ const createTransaction = async (req, res) => {
  
     res.status(StatusCodes.OK).json({ transaction });
   };
-  
+
+
+
   module.exports = {createTransaction, getAllTransaction, deleteTransaction}

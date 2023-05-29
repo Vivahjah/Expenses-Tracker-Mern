@@ -3,11 +3,12 @@ const express = require("express");
 const router = express.Router();
 
 const {
-  createTransaction,
-  getAllTransaction,
-  deleteTransaction
+  createTransaction, getAllTransaction, deleteTransaction,
+ 
+  // deleteTransaction
 } = require("../controllers/transaction");
 
-router.route("/").post(createTransaction).get(getAllTransaction).delete(deleteTransaction);
+
+router.route("/").post(createTransaction).get(getAllTransaction).delete(deleteTransaction)
 
 module.exports = router;
