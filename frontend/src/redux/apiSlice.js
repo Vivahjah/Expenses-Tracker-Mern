@@ -6,19 +6,19 @@ export const apiSlice = createApi({
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: () => "/category",
-      providesTags : ['catogery']
+      providesTags : ['catogeries']
     }),
     getLabels: builder.query({
       query: () => "/label",
-      providesTags : ['label']
+      providesTags : ['transactions']
     }),
     addTransaction: builder.mutation({
-      query: (inistialState) => ({
+      query: (initialState) => ({
         url: "/transaction",
         method: "POST",
-        body: inistialState,
+        body: initialState,
       }),
-      invalidatesTags:['transaction']
+      invalidatesTags:['transactions']
     }),
     deleteTransaction: builder.mutation({
       query: (recordId) => ({
@@ -26,7 +26,7 @@ export const apiSlice = createApi({
         method: "DELETE",
         body: recordId,
       }),
-      invalidatesTags:['transaction']
+      invalidatesTags:['transactions']
     }),
   }),
 });

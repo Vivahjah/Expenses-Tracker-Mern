@@ -2,10 +2,22 @@ import React from "react";
 import "boxicons";
 import { default as api } from "../redux/apiSlice";
 
-
 const Lists = () => {
   const { data, isFetching, isError, isSuccess } = api.useGetLabelsQuery();
-  console.log(data);
+  const [deleteTransaction] = api.useDeleteTransactionMutation();
+
+
+ 
+
+  const handleDelete = async (e) => {
+    if(!e.target.dataset.id) return;
+   try {
+    await deleteTransaction({_id : e.target.dataset.id})
+   } catch (error) {
+    console.log(error);
+   }
+  }
+
   let Transaction;
 
   if (isFetching) {
@@ -16,7 +28,7 @@ const Lists = () => {
   }
   if (isSuccess) {
     Transaction = data.labelDetails.map((value, i) => (
-      <Transactions key={i} category={value} />
+      <Transactions handleDelete={handleDelete} key={i} category={value} />
     ));
   }
 
@@ -30,8 +42,9 @@ const Lists = () => {
 
 export default Lists;
 
-const Transactions = ({ category }) => {
+const Transactions = ({ category, handleDelete }) => {
   if (!category) return null;
+
 
   return (
     <div
@@ -40,6 +53,8 @@ const Transactions = ({ category }) => {
     >
       <button className="px-3">
         <box-icon
+        data-id={category.id ?? ""}
+        onClick={handleDelete}
           name="trash"
           color={category.color ?? "#e5e5e5"}
           size="15px"

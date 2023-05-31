@@ -8,11 +8,18 @@ const Forms = () => {
     const {register, handleSubmit, resetField} = useForm();
 
     const onSubmit = async (data) => {
-      if(!data) return {};
-      await addTransaction(data).unwrap()
-      resetField('name')
-      resetField('amount')
-       
+      if(!data) return;
+      try {
+        
+        await addTransaction(data).unwrap()
+        resetField('name')
+        resetField('amount')
+        console.log(data);
+         
+      } catch (error) {
+        alert(error.data.msg)
+        
+      }
        
     }
   return (
@@ -24,9 +31,9 @@ const Forms = () => {
             <input type="text" {...register('name')} placeholder="Salary, House Rent, SIP" className="form-input" />
           </div>
           <select className="form-input" {...register('type')} >
-            <option value="investment" defaultValue>Investments</option>
-            <option value="expenses">Expenses</option>
-            <option value="savings">Savings</option>
+            <option value="Investment" defaultValue>Investments</option>
+            <option value="Expenses">Expenses</option>
+            <option value="Savings">Savings</option>
           </select>
           <div className="input-group">
             <input type="text" {...register('amount')} placeholder="Amount" className="form-input" />
