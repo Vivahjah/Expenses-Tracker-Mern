@@ -4,7 +4,7 @@ import Lists from "./Lists";
 import { default as api } from "../redux/apiSlice";
 
 const Forms = () => {
-  const [addTransaction] = api.useAddTransactionMutation()
+  const [addTransaction] = api.useAddTransactionMutation() //called from the reduxRTK
     const {register, handleSubmit, resetField} = useForm();
 
     const onSubmit = async (data) => {
