@@ -24,35 +24,34 @@ export const getLabels = (transaction) => {
     .map((objs) => _.assign(objs, { percent: (100 * objs.total) / Total }))
     .value();
 
-    return percent;
+  return percent;
 };
 
 export const chartData = (transaction, custom) => {
-    let dataValue = getSum(transaction);
-    let bg = _.map(transaction, a => a.color)
-    bg = _.uniq(bg)
-    
-    const config = {
-        data: {
-          datasets: [
-            {
-              label: "My First Dataset",
-              data: dataValue,
-              backgroundColor:bg,
-              hoverOffset: 4,
-              borderRadius : 30,
-              spacing : 10
-            },
-          ],
+  let dataValue = getSum(transaction);
+  let bg = _.map(transaction, (a) => a.color);
+  bg = _.uniq(bg);
+
+  const config = {
+    data: {
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: dataValue,
+          backgroundColor: bg,
+          hoverOffset: 4,
+          borderRadius: 30,
+          spacing: 10,
         },
-        options : {
-          cutout : 115,
-          
-        }
-      };
-      return custom ?? config
+      ],
+    },
+    options: {
+      cutout: 115,
+    },
+  };
+  return custom ?? config;
+};
 
+export function getTotal(transaction){
+  return _.sum(getSum(transaction));
 }
-
-
-export const getTotal = (transaction) => _.sum(getSum(transaction))
