@@ -1,22 +1,20 @@
 import React from "react";
-import "boxicons";
+
 import { default as api } from "../redux/apiSlice";
+import { RiDeleteBin6Fill } from "react-icons/ri";
 
 const Lists = () => {
   const { data, isFetching, isError, isSuccess } = api.useGetLabelsQuery();
   const [deleteTransaction] = api.useDeleteTransactionMutation();
 
-
- 
-
   const handleDelete = async (e) => {
-    if(!e.target.dataset.id) return;
-   try {
-    await deleteTransaction({_id : e.target.dataset.id})
-   } catch (error) {
-    console.log(error);
-   }
-  }
+    if (!e.target.dataset.id) return;
+    try {
+      await deleteTransaction({ _id: e.target.dataset.id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   let Transaction;
 
@@ -45,21 +43,17 @@ export default Lists;
 const Transactions = ({ category, handleDelete }) => {
   if (!category) return null;
 
-
   return (
     <div
       className="item flex justify-center bg-gray-50 py-2 rounded-r"
       style={{ borderRight: `8px solid ${category.color ?? "#e5e5e5"}` }}
     >
-      <button className="px-3">
-        <box-icon
-        data-id={category.id ?? ""}
+      <RiDeleteBin6Fill
+        className="mt-2 ml-2 cursor-pointer"
         onClick={handleDelete}
-          name="trash"
-          color={category.color ?? "#e5e5e5"}
-          size="15px"
-        />
-      </button>
+        data-id={category.id ?? ""}
+        color={category.color ?? "#e5e5e5"}
+      />
       <span className="block w-full">{category.name}</span>
     </div>
   );
